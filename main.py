@@ -47,7 +47,7 @@ def webhook():
                 if "message" in messaging and "text" in messaging["message"]:
                     text = messaging["message"]["text"].strip()
 
-                    # 🔑 إدخال كود؟
+                    # 🔑 إدخال كود السؤال؟
                     if awaiting_code.get(sender_id):
                         code = text.upper()
                         if code in shared_questions:
@@ -69,7 +69,7 @@ def webhook():
                             send_message(sender_id, "✅ إجابة صحيحة: طوكيو 🇯🇵", quick_replies=[
                                 {"content_type": "text", "title": "ابدأ", "payload": "START"},
                                 {"content_type": "text", "title": "📤 مشاركة السؤال", "payload": "SHARE"},
-                                {"content_type": "text", "title": "🔑 إدخال كود", "payload": "CODE"}
+                                {"content_type": "text", "title": "🔑 إدخال كود السؤال ", "payload": "CODE"}
                             ])
                             if code in shared_questions:
                                 owner_id = shared_questions[code]["sender_id"]
@@ -93,14 +93,14 @@ def webhook():
                         send_message(sender_id, question, quick_replies=[
                             {"content_type": "text", "title": "💡 تلميح", "payload": "HINT"},
                             {"content_type": "text", "title": "📤 مشاركة السؤال", "payload": "SHARE"},
-                            {"content_type": "text", "title": "🔑 إدخال كود", "payload": "CODE"}
+                            {"content_type": "text", "title": "🔑 إدخال كود السؤال ", "payload": "CODE"}
                         ])
 
                     elif text == "💡 تلميح":
                         send_message(sender_id, "📌 يبدأ بحرف ط وينتهي بـ و", quick_replies=[
                             {"content_type": "text", "title": "💡 تلميح", "payload": "HINT"},
                             {"content_type": "text", "title": "📤 مشاركة السؤال", "payload": "SHARE"},
-                            {"content_type": "text", "title": "🔑 إدخال كود", "payload": "CODE"}
+                            {"content_type": "text", "title": "🔑 إدخال كود السؤال ", "payload": "CODE"}
                         ])
 
                     elif text == "📤 مشاركة السؤال":
@@ -110,11 +110,11 @@ def webhook():
                             "sender_id": sender_id
                         }
                         send_message(sender_id, f"🔗 انسخ وابعث الكود لصديقك:\n📌 الكود: {code}", quick_replies=[
-                            {"content_type": "text", "title": "🔑 إدخال كود", "payload": "CODE"},
+                            {"content_type": "text", "title": "🔑 إدخال كود السؤال ", "payload": "CODE"},
                             {"content_type": "text", "title": "ابدأ", "payload": "START"}
                         ])
 
-                    elif text == "🔑 إدخال كود":
+                    elif text == "🔑 إدخال كود السؤال ":
                         awaiting_code[sender_id] = True
                         send_message(sender_id, "📥 أرسل كود السؤال الذي وصلك:")
 
@@ -122,7 +122,7 @@ def webhook():
                         send_message(sender_id, "❌ لم أفهم، حاول من جديد.", quick_replies=[
                             {"content_type": "text", "title": "ابدأ", "payload": "START"},
                             {"content_type": "text", "title": "📤 مشاركة السؤال", "payload": "SHARE"},
-                            {"content_type": "text", "title": "🔑 إدخال كود", "payload": "CODE"}
+                            {"content_type": "text", "title": "🔑 إدخال كود السؤال ", "payload": "CODE"}
                         ])
         return "ok", 200
 
